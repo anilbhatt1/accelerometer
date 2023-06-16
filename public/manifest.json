@@ -1,0 +1,16 @@
+{
+    "short_name": "Accel V0",
+    "name": "Accelerometer Reading",
+    "icons": [
+        {
+            "src": "/images/accellogo.png",
+            "type": "image/png",
+            "sizes": "1024x1024",
+            "purpose": "any maskable"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#ffffff"
+}

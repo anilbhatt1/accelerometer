@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="./images/accellogo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Accel-V0" />
+    <link rel="apple-touch-icon" href="./images/accellogo.png" />
+    <link rel="manifest" href="./manifest.json" />
+    <title>Accel-V00</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script>      
+      if ('serviceWorker' in navigator){
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./serviceworker.js')
+            .then((reg) => console.log('Success Accel V0: ', reg.scope)) 
+            .catch((err) => console.log('Failure Accel v0: ', err));
+        })
+      }
+    </script>    
+  </body>
+</html>
