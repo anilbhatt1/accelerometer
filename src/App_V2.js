@@ -1,10 +1,9 @@
 /*
-This code is for the following:
-- Display x, y, z data at a fixed interval say 3 secs
+This code works fine with both Android and IOS
+- Displays x, y, z data continously 
 */
 
 import React, { useEffect, useState } from 'react';
-import { adddata } from './ApiService.js';
 
 const App = () => {
   const [acceleration, setAcceleration] = useState({ x: 0, y: 0, z: 0 });
@@ -12,19 +11,13 @@ const App = () => {
   const isiOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
   const isNone = !isAndroid && !isiOS;
   const isFunc = (typeof DeviceMotionEvent.requestPermission === 'function')
-  const getCurrentTimestamp = () => {
-    const now = new Date();
-    const timestamp = now.toISOString().replace(/[-:.TZ]/g, '').replace(/[^\d*]/g, '');
-    return timestamp;
-  };  
-  
-    
-  const handlePermissionRequest = () => {    
-    if (isFunc) {
+
+  const handlePermissionRequest = () => {
+    if (typeof DeviceMotionEvent.requestPermission === 'function') {
       DeviceMotionEvent.requestPermission()
         .then((response) => {
           if (response === 'granted') {
-                window.addEventListener('devicemotion', handleMotionEvent);  
+            window.addEventListener('devicemotion', handleMotionEvent);
           }
         })
         .catch((error) => {
@@ -33,29 +26,24 @@ const App = () => {
     }
   };
 
-  const handleStartRequest = () => {    
-            window.addEventListener('devicemotion', handleMotionEvent);  
+  const handleStartRequest = () => {
+            window.addEventListener('devicemotion', handleMotionEvent);    
   };
 
   const handleMotionEvent = (event) => {
-        const { x, y, z } = event.accelerationIncludingGravity;
-        adddata(x, y, z)
-            .then(res => {
-                console.log("Current Timestamp: ", getCurrentTimestamp(), "Response: ", res)
-            });
-        setAcceleration({ x, y, z });
+    const { x, y, z } = event.accelerationIncludingGravity;
+    setAcceleration({ x, y, z });
   };
 
   useEffect(() => {
     return () => {
       window.removeEventListener('devicemotion', handleMotionEvent);
     };
-  });  
+  }, []);
 
   return (
     <div>
         <h1>Accelerometer Data</h1>
-        <p>Current Timestamp: {getCurrentTimestamp()}</p>
         <p>X: {acceleration.x}</p>
         <p>Y: {acceleration.y}</p>
         <p>Z: {acceleration.z}</p>
