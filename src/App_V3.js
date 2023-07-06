@@ -1,10 +1,9 @@
 /*
-- Displays x, y, z data in specified time limits 
+- Displays x, y, z data in specified time limits (modification to App_V2.js)
 - Works fine in Android and should work in iOS too 
 */
 
 import React, { useEffect, useState, useRef } from 'react';
-import { getdata, adddata} from './ApiService';
 
 const App = () => {
   const [acceleration, setAcceleration] = useState({ x: 0, y: 0, z: 0 });
