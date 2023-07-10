@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default function adddata(x, y ,z) {
+export function adddata(x, y ,z) {
     if (x == null) {
         x = 0.01
     }
@@ -11,7 +11,9 @@ export default function adddata(x, y ,z) {
         z = 0.01
     }
 
-    return axios.post('http://127.0.0.1:8000/accel/',
+    // return axios.post('http://127.0.0.1:8000/accel/',
+    // return axios.post('http://accelv3alb1-1598609463.us-east-1.elb.amazonaws.com:8000/accel/',
+    return axios.post('https://api.neuralorbs.com/accel/',
     {   
         id: null,
         x_accel: x,
@@ -23,8 +25,10 @@ export default function adddata(x, y ,z) {
         return res.data
     })}
 
-export default function getdata() {
-    return axios.get('http://127.0.0.1:8000/accel/')
+export function getdata() {
+    // return axios.get('http://127.0.0.1:8000/accel/')
+    // return axios.get('http://accelv3alb1-1598609463.us-east-1.elb.amazonaws.com:8000/accel/')    
+    return axios.post('https://api.neuralorbs.com/accel/')
     .then(res => {
         return res.data
     })}
